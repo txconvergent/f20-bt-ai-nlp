@@ -12,16 +12,16 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # get all data from the unsummarized collection in db
-all_data = 0
-async def getCollection(data):
-    all_data = db.collection(u'UTNews').document(u'Document').collection(u'Unsummarized')
+async def getCollection():
+    return db.collection(u'UTNews').document(u'Document').collection(u'Unsummarized')
+
+all_data = getCollection()
 
 # take text for each article, summarize it and add it to summarized collection
 model = Summarizer()
-
 for doc in all_data:
     article = doc.get('text')
-    result = model(article, num_sentences = 4)
+    result = model(article, num_sentences = 3)
     summary = "".join(result)
     new_data = {
         'text': summary,
