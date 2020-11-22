@@ -19,7 +19,7 @@ async def getCollection(data):
 # take text for each article, summarize it and add it to summarized collection
 model = Summarizer()
 
-for doc in allData:
+for doc in all_data:
     article = doc.get('text')
     result = model(article, num_sentences = 4)
     summary = "".join(result)
