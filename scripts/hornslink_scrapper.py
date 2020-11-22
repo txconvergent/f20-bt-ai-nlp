@@ -79,7 +79,7 @@ def get_info():
     #the for link in link_list: in case you are testing
     for link in link_list:
     #for i in range(3):
-        
+    
         #link = link_list[i]
 
         #more browser stuff

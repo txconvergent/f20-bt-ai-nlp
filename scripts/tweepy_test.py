@@ -52,16 +52,15 @@ def get_user_tweets(user, max_tweets):
             if "], 'urls': [{'url'" in tweet._json:
                 # if tweet does contain a link
                 tweet_with_link(tweet, text, u'UserTweets') 
-                print("--------------------------------------------------------")
             else:
                 # else if tweet does not have a link
                 tweet_without_link(tweet, text, u'UserTweets')
-                print("--------------------------------------------------------")
             '''
             if x<0:
                 print(tweet._json)
                 x += 1
             '''
+        print("--------------------------------------------------------")
     print('###############################################################')
 
 
@@ -110,8 +109,9 @@ def get_trends(lat=30.284477, lon=-97.736939):
         print(trend['name'])
 
 if __name__ == '__main__':
-    get_user_tweets("UTAustin", 5)
-    get_user_tweets("thedailytexan", 5)
+    get_user_tweets("UTAustin", 2)
+    get_user_tweets("thedailytexan", 2)
+    get_user_tweets('Healthyhorns', 3)
     search_tweets("UT Austin", 25)
     search_tweets("University of Texas at Austin", 15)
-    #get_trends()
+    # get_trends()
