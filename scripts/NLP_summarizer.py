@@ -48,16 +48,13 @@ def summarizeDailyTexan():
     model = Summarizer()
     # TODO: REMEMBER TO CHANGE THE RANGE BELOW
     for doc in all_data[:4]:
-        # uses newpaper library to get text of article from the URL
-        article = fulltext(requests.get(doc.get('URL')).text)
         # summarizes the articles into 2 sentences
-        result = model(article, num_sentences = 2)
+        result = model(doc.get('text'), num_sentences = 2)
         summary = "".join(result)
         new_data = {
             'title': doc.get('title'),
             'url': doc.get('URL'),
             'text': summary,
-            'genre': doc.get('genre')
         }
         db.collection(u'DailyTexan').document(u'Documents').collection(u'Summarized').add(new_data)
         print('----------finished--------')

@@ -42,15 +42,13 @@ def get_UT_news():
         UT_news_data = json.load(f)
         # TODO: FIND A WAY TO CLEAR THE JSON FILE AFTER EVERY API CALL
 
-
     return UT_news_data
 
 
-# MAKE IT SO THAT THE USER NAME PUT IN IS CALLED
-@app.get('/Tweets/{SOME USER}')
-def get_tweets():
+@app.get('/Tweets/{user_name}')
+def get_user_tweets(user_name : str):
     tweepy_script.main()
-    db_data = db.collection(u'Tweets').document(u'userTweets').collection(u'SOME USER').get()
+    db_data = db.collection(u'Tweets').document(u'userTweets').collection(u'{}'.format(user_name)).get()
     data = []
 
     for doc in db_data:
@@ -69,5 +67,60 @@ def get_tweets():
         json.dump(data, f, indent = 6, ensure_ascii=False)
         twitter_data = json.load(f)
         # TODO: FIND A WAY TO CLEAR THE JSON FILE AFTER EVERY API CALL
+        
             
     return twitter_data
+
+@app.get('/Tweets/TweetsOnCampus')
+def get_tweets_on_campus():
+    tweepy_script.main()
+    db_data = db.collection(u'Tweets').document(u'TweetsOnCampus').get()
+    data = []
+
+    for doc in db_data:
+        tweet = doc.get()
+        doc_data = {
+            'username': doc.get('name'),
+            'tag': doc.get('tag'),
+            'date': doc.get('date'),
+            'text': doc.get('text'),
+            'tweet_link': doc.get('link_of_tweet'),
+        }
+        # Appends every doc in collection db_data to the list data
+        data.append(doc_data)
+
+    # data is added to the json file, which is ultimately returned
+    with open(r'data\twitter_on_campus_tweets_data.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent = 6, ensure_ascii=False)
+        twitter_on_campus_tweets_data = json.load(f)
+        # TODO: FIND A WAY TO CLEAR THE JSON FILE AFTER EVERY API CALL
+        
+            
+    return twitter_on_campus_tweets_data
+
+@app.get('/Hornslink')
+def get_hornslink():
+    hornslink_scrapper.main()
+    db_data = db.collection(u'Hornslink').get()
+    data = []
+
+    for doc in db_data:
+        doc_data = {
+            'title': doc.get('title'),
+            'date_and_time': doc.get('date_and_time'),
+            'description': doc.get('description'),
+            'host': doc.get('host'),
+            'location': doc.get('location'),
+            'url': doc.get('url')
+        }
+        # Appends every doc in collection db_data to the list data
+        data.append(doc_data)
+
+    # data is added to the json file, which is ultimately returned
+    with open(r'data\hornslink_data.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent = 6, ensure_ascii=False)
+        hornslink_data = json.load(f)
+        # TODO: FIND A WAY TO CLEAR THE JSON FILE AFTER EVERY API CALL
+        
+            
+    return hornslink_data
