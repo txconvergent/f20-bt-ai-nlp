@@ -16,14 +16,6 @@ db = firestore.client()
 
 # get all data from the unsummarized collection in db  
 
-def main():
-    summarizeDailyTexan()
-    summarizeUTNews()
-
-if __name__ == "__main__":
-    main()
-
-
 def summarizeUTNews():
     all_data = db.collection(u'UTNews').document(u'Documents').collection(u'Unsummarized').get()
     # take text for each article, summarize it and add it to summarized collection
@@ -36,17 +28,20 @@ def summarizeUTNews():
         # summarizes the articles into 2 sentences
         result = model(article, num_sentences = 2)
         summary = "".join(result)
+        summary = u'{}'.format(summary)
         new_data = {
-            'text': summary,
+            # TODO: ONCE WORKING, DELETE ALL SUMMARIZED ARTICLES AND RESTART IT INCLUDING CATEGORY FIELD
+            #'category': doc.get('category'),
             'title': doc.get('title'),
+            'text': summary,
             'url': doc.get('url')
         }
         db.collection(u'UTNews').document(u'Documents').collection(u'Summarized').add(new_data)
         print('----------finished--------')
 
-summarizeUTNews()
-
 # take text for each article, summarize it and add it to summarized collection
+# NOTE: given just the title and URL, we can summarize articles for any other publication in 
+#       future
 def summarizeDailyTexan():
     all_data = db.collection(u'DailyTexan').document(u'Documents').collection(u'Unsummarized').get()
 
@@ -67,5 +62,11 @@ def summarizeDailyTexan():
         db.collection(u'DailyTexan').document(u'Documents').collection(u'Summarized').add(new_data)
         print('----------finished--------')
 
-summarizeUTNews()
+def main():
+    #summarizeDailyTexan()
+    summarizeUTNews()
+
+if __name__ == "__main__":
+    main()
+
 

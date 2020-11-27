@@ -108,9 +108,10 @@ def get_trends(lat=30.284477, lon=-97.736939):
         print(trend['name'])
 
 if __name__ == '__main__':
-    get_user_tweets("UTAustin", 2)
-    get_user_tweets("thedailytexan", 2)
-    get_user_tweets('Healthyhorns', 3)
-    search_tweets("UT Austin", 25)
-    search_tweets("University of Texas at Austin", 15)
+    get_user_tweets("UTAustin", 4)
+    get_user_tweets("thedailytexan", 4)
+    get_user_tweets('Healthyhorns', 4)
+    get_user_tweets('TexasLonghorns', 4)
+    search_tweets("UT Austin", 50)
+    search_tweets("University of Texas at Austin", 50)
     # get_trends()

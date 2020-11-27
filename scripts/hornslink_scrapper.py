@@ -12,7 +12,7 @@ from firebase_admin import firestore
 #this is my (melvin) path to the JSON file by default
 #if you are running it you need to install the JSON file for your account and change the
 #path to the path to your JSON file.
-cred = credentials.Certificate(r"C:\Users\astro\Desktop\Convergent\UTrends.json")
+cred = credentials.Certificate(r"C:\Users\akifa\OneDrive\Documents\GitHub\f20-bt-ai-nlp\scripts\forestoreKey.json")
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
