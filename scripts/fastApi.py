@@ -1,6 +1,7 @@
 from fastapi import FastApi
 import NLP_summarizer
 import UT_news_scraper
+import daily_texan_scraper
 import hornslink_scrapper
 import json
 import tweepy_script
@@ -20,8 +21,10 @@ app = FastApi()
 # NOTE: THIS FORMAT CAN TAKE ANY OTHER NEWS SITE IN THE FUTURE
 @app.get('/UTnews')
 def get_UT_news():
+    # run scripts to scrape daily texan and summarize article
     UT_news_scraper.main()
-    NLP_summarizer.main()
+    NLP_summarizer.summarizeUTNews()
+
     db_data = db.collection(u'UTNews').document(u'Documents').collection(u'Summarized').get()
     data = []
 
@@ -44,9 +47,38 @@ def get_UT_news():
 
     return UT_news_data
 
+@app.get('/DailyTexan')
+def get_UT_news():
+    # run scripts to scrape daily texan and summarize article
+    daily_texan_scraper.main()
+    NLP_summarizer.summarizeDailyTexan()
+
+    db_data = db.collection(u'DailyTexan').document(u'Documents').collection(u'Summarized').get()
+    data = []
+
+    for doc in db_data:
+        doc_data = {
+            # TODO: CHANGE WHEN UPDATE MADE IN NLP_SUMMARIZER
+            #'category': doc.get('category'),
+            'title': doc.get('title'),
+            'summary': doc.get('text'),
+            'url': doc.get('url')
+        }
+        # Appends every doc in collection db_data to the list data
+        data.append(doc_data)
+
+    # data is added to the json file, which is ultimately returned
+    with open(r'data\daily_texan_data.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent = 6, ensure_ascii=False)
+        UT_news_data = json.load(f)
+        # TODO: FIND A WAY TO CLEAR THE JSON FILE AFTER EVERY API CALL
+
+    return UT_news_data
+
 
 @app.get('/Tweets/{user_name}')
 def get_user_tweets(user_name : str):
+    # TODO: WE NEED TO TAKE DUPLICATE TWEETS INTO ACCOUNT
     tweepy_script.main()
     db_data = db.collection(u'Tweets').document(u'userTweets').collection(u'{}'.format(user_name)).get()
     data = []

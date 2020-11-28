@@ -19,13 +19,6 @@ class URLS(object):
         self.url = url
         self.category = category
 
-#object connecting the URL, category, title and article
-class Event(object):
-    def __init__(self, URLS, title, text):
-        self.URLS = URLS
-        self.title = title
-        self.text = text
-
 #scraping the news site for the URLs and its categories
 def get_links():
     url = "https://news.utexas.edu/archive/"
