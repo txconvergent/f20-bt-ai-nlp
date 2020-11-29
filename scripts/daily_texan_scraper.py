@@ -21,54 +21,63 @@ class URLS(object):
 
 #scraping the news site for the URLs and its categories
 def get_links():
-    url = "https://news.utexas.edu/archive/"
+    def get_links():
+    url = "https://thedailytexan.com/section/news"
     data = requests.get(url).text
     soup = BeautifulSoup(data, 'html.parser')
-    content = soup.find('section', {'class': 'content-wrapper'})
 
     url_list = []
     URLS_list = []
 
-    for news in content.find_all('a'):
+    for news in soup.find_all('div', {'class': 'story-image'}):
         try:
-            if news.get('href') not in url_list and news.get('href').find("news.utexas.edu") == 8:
-                if news.get('href').find("/archive/") == -1:
-                    url_list.append(news.get('href'))
-                    URLS_list.append(URLS(news.get('href'), "News"))
+            news = news.find('a')
+            if news.get('href') not in url_list:
+                url_list.append(news.get('href'))
+                URLS_list.append(URLS('https://thedailytexan.com' + news.get('href'), "News"))
         except AttributeError:
             continue
 
-    url = "https://news.utexas.edu/tag/covid-19/"
+    url = "https://thedailytexan.com/section/campus"
     data = requests.get(url).text
     soup = BeautifulSoup(data, 'html.parser')
-    content = soup.find('section', {'class': 'content-wrapper'})
 
-    for news in content.find_all('a'):
+    for news in soup.find_all('div', {'class': 'story-image'}):
         try:
-            if news.get('href') not in url_list and news.get('href').find("news.utexas.edu") == 8:
-                if news.get('href').find("/covid-19/") == -1:
-                    url_list.append(news.get('href'))
-                    URLS_list.append(URLS(news.get('href'), "Covid-19"))
+            news = news.find('a')
+            if news.get('href') not in url_list:
+                url_list.append(news.get('href'))
+                URLS_list.append(URLS('https://thedailytexan.com' + news.get('href'), "Campus"))
         except AttributeError:
             continue
 
-    url = "https://news.utexas.edu/campus-community/"
+    url = "https://thedailytexan.com/section/crime"
     data = requests.get(url).text
     soup = BeautifulSoup(data, 'html.parser')
-    content = soup.find('section', {'class': 'content-wrapper'})
 
-    for news in content.find_all('a'):
+    for news in soup.find_all('div', {'class': 'story-image'}):
         try:
-            if news.get('href') not in url_list and news.get('href').find("news.utexas.edu") == 8:
-                if news.get('href').find("/campus-community/") == -1:
-                    url_list.append(news.get('href'))
-                    URLS_list.append(URLS(news.get('href'), "Campus and Community"))
+            news = news.find('a')
+            if news.get('href') not in url_list:
+                url_list.append(news.get('href'))
+                URLS_list.append(URLS('https://thedailytexan.com' + news.get('href'), "Crime"))
+        except AttributeError:
+            continue
+
+    url = "https://thedailytexan.com/section/university"
+    data = requests.get(url).text
+    soup = BeautifulSoup(data, 'html.parser')
+
+    for news in soup.find_all('div', {'class': 'story-image'}):
+        try:
+            news = news.find('a')
+            if news.get('href') not in url_list:
+                url_list.append(news.get('href'))
+                URLS_list.append(URLS('https://thedailytexan.com' + news.get('href'), "University"))
         except AttributeError:
             continue
 
     return URLS_list
-
-
 
 # ALL I NEED IS THE LINKS 
 def upload_to_db(links):
