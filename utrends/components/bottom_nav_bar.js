@@ -9,11 +9,13 @@ import { SavedScreen } from '../screens/saved.js';
 import { ProfilePage } from '../screens/profile.js';
 import { SettingsPage } from '../screens/settings.js';
 
+import { navigationRef } from '../RootNavigation.js';
+
 const Tab = createBottomTabNavigator();
 
 export const BottomNavBar = () => {
     return (
-        <NavigationContainer>
+        <NavigationContainer ref={navigationRef}>
             <Tab.Navigator tabBarOptions={{showLabel: false, style: {borderTopColor: 'transparent'}}}>
                 
                 <Tab.Screen 
@@ -53,9 +55,8 @@ export const BottomNavBar = () => {
                     }} />
 
 
-                <Tab.Screen name="Profile" component={ProfilePage} options={{tabBarButton: () => null, tabBarVisible: false}} />
-                <Tab.Screen name="Settings" component={SettingsPage} options={{tabBarButton: () => null, tabBarVisible: false}} />
-            
+                <Tab.Screen name="Profile" component={ProfilePage} options={{tabBarButton: () => null, tabBarVisible: true}} />
+                <Tab.Screen name="Settings" component={SettingsPage} options={{tabBarButton: () => null, tabBarVisible: true}} />
             </Tab.Navigator>
         </NavigationContainer>
     );
@@ -66,4 +67,4 @@ const styles = StyleSheet.create({
         width: 55,
         height: 55,
     }
-})
+});

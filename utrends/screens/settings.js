@@ -3,8 +3,17 @@ import { StyleSheet, Text, View } from 'react-native';
 
 export const SettingsPage = () => {
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={styles.container}>
           <Text>Settings</Text>
         </View>
       );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+});
