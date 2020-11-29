@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import { Card } from '../components/card.js';
 
-export class HomeScreen extends React.Component {
+export class SwipeScreen extends React.Component {
 
     constructor(props){
       super(props);
@@ -50,7 +50,7 @@ export class HomeScreen extends React.Component {
 
             infinite={true}
             backgroundColor={'white'}
-            stackSize={2}
+            stackSize={5}
             />
         </View>
       )

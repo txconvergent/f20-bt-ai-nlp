@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet, Image } from 'react-native';
 
-import { HomeScreen } from '../screens/home.js';
+import { SwipeScreen } from '../screens/home.js';
 import { SearchScreen } from '../screens/search.js';
 import { SavedScreen } from '../screens/saved.js';
 import { ProfilePage } from '../screens/profile.js';
@@ -13,6 +13,23 @@ import { navigationRef } from '../RootNavigation.js';
 
 const Tab = createBottomTabNavigator();
 
+const images = {
+    home: {
+        unpressed: require('../assets/home_unpressed.png'),
+        pressed: require('../assets/home_pressed.png'),
+    },
+
+    search: {
+        unpressed: require('../assets/search_unpressed.png'),
+        pressed: require('../assets/search_pressed.png'),
+    },
+
+    saved: {
+        unpressed: require('../assets/saved_unpressed.png'),
+        pressed: require('../assets/saved_pressed.png'),
+    },
+}
+
 export const BottomNavBar = () => {
     return (
         <NavigationContainer ref={navigationRef}>
@@ -20,13 +37,13 @@ export const BottomNavBar = () => {
                 
                 <Tab.Screen 
                         name="Home" 
-                        component={HomeScreen} 
+                        component={SwipeScreen} 
                         options={{
-                            tabBarIcon: () => (
+                            tabBarIcon: ({focused}) => (
                                 <Image
                                     style={styles.navIcon}
-                                    source={require('../assets/home_unpressed.png')              
-                                }/>
+                                    source={focused ? images.home.pressed : images.home.unpressed}          
+                                />
                             ),
                     }} />
 
@@ -34,11 +51,11 @@ export const BottomNavBar = () => {
                     name="Search" 
                     component={SearchScreen} 
                     options={{
-                        tabBarIcon: () => (
+                        tabBarIcon: ({focused}) => (
                             <Image
                                 style={styles.navIcon}
-                                source={require('../assets/search_unpressed.png')              
-                            }/>
+                                source={focused ? images.search.pressed : images.search.unpressed}       
+                            />
                         ),
                     }} />
 
@@ -46,11 +63,11 @@ export const BottomNavBar = () => {
                     name="Saved" 
                     component={SavedScreen} 
                     options={{
-                        tabBarIcon: () => (
+                        tabBarIcon: ({focused}) => (
                             <Image
                                 style={styles.navIcon}
-                                source={require('../assets/saved_unpressed.png')              
-                            }/>
+                                source={focused ? images.saved.pressed : images.saved.unpressed}       
+                            />
                         ),
                     }} />
 
