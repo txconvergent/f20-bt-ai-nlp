@@ -8,14 +8,17 @@ export class HomeScreen extends React.Component {
     constructor(props){
       super(props);
       this.state = {
+        category: 'General',
         cards: ['This is a significant amount of text lol how much can we fit', '1', '2', '3', '4', '5', '6', '7', '8', ''],
+        sources: ['Twitter', 'HornsLink', 'News', 'News', 'Twitter', 'HornsLink', 'News', 'Twitter', 'HornsLink', 'Twitter'],
+        sourceText: ['@DailyTexan', 'HornsLink', 'Austin-American Statesman', 'Daily Texan', '@McconaugheyOfficial', 'HornsLink', 'KXAN', '@SamEhlinger', 'HornsLink', '@UTAustin'],
         cardIndex: 0,
       };
     }
   
-    renderCard = (card) => {
+    renderCard = (cardText, cardIndex) => {
       return (
-        <Card text={card} category={'General'}/>
+        <Card text={cardText} category={this.state.category} source={this.state.sources[cardIndex]} sourceText={this.state.sourceText[cardIndex]}/>
       )
     }
   

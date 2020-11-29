@@ -1,23 +1,43 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 
+const images = {
+    twitter: require('../assets/twitter_blue.png'),
+    horns_link: require('../assets/ut_logo.png'),
+    news: require('../assets/news_icon.png'),
+}
+
 export class Card extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             text: props.text,
+            source: props.source,
+            sourceText: props.sourceText,
             category: props.category,
         };
     }
 
     render() {
-        console.log(this.state.text);
+
+        var image = images.twitter;
+        if(this.state.source == "Twitter") {
+            image = images.twitter;
+        }
+        else if(this.state.source == "HornsLink") {
+            image = images.horns_link;
+        }
+        else if(this.state.source == "News") {
+            image = images.news;
+        }
+
+
         return (
             <View style={styles.card}>
                 <View style={styles.sourceContainer}>
-                    <Image style={styles.sourceImage} source={require('../assets/twitter_blue.png')}/>
-                    <Text style={styles.sourceText}>@DailyTexan</Text>
+                    <Image style={styles.sourceImage} source={image}/>
+                    <Text style={styles.sourceText}>{this.state.sourceText}</Text>
                 </View>
 
                 <View style={styles.categoryContainer}>
@@ -85,14 +105,17 @@ const styles = StyleSheet.create({
     },
 
     sourceImage: {
-        width: 75,
-        height: 75,
+        width: 60,
+        height: 60,
+        left: 10,
+        top: 5,
         backgroundColor: 'transparent',
     },
 
     sourceText: {
         fontSize: 20,
         marginLeft: 10,
+        marginTop: 10,
         color: 'white',
         fontFamily: 'AvenirNext-Bold',
     },
