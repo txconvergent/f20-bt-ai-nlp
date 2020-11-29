@@ -1,28 +1,25 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
+import { Card } from '../components/card.js';
 
 export class HomeScreen extends React.Component {
 
     constructor(props){
       super(props);
       this.state = {
-        cards: ['PLACEHOLDER 0', '1', '2', '3', '4', '5', '6', '7', '8', ''],
+        cards: ['This is a significant amount of text lol how much can we fit', '1', '2', '3', '4', '5', '6', '7', '8', ''],
         cardIndex: 0,
       };
     }
   
     renderCard = (card) => {
       return (
-        <View style={styles.card}>
-          <Text style={styles.cardText}>{card}</Text>
-        </View>
+        <Card text={card} category={'None'}/>
       )
     }
   
     onSwiped = (cardIndex) => {
-      this.swiper.jumpToCardIndex(0)
-      console.log("UPDATING CARDS")
       if (cardIndex == 8) {
         const newCards = this.getNewCards();
         this.setState({
@@ -32,7 +29,7 @@ export class HomeScreen extends React.Component {
     }
   
     getNewCards = () => {
-      return ['NEW0', 'NEW1', 'NEW2', 'NEW3', 'NEW4', 'NEW5', 'NEW6', 'NEW7', 'NEW8', 'NEW9']
+      return ['New 0', 'New 1', 'New 2', 'New 3', 'New 4', 'New 5', 'New 6', 'New 7', 'New 8', 'New 9']
     }
   
     render() {
@@ -66,21 +63,5 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     backgroundColor: 'white',
-  },
-  
-  card: {
-    flex: 1,
-    borderRadius: 15,
-    borderWidth: 2,
-    borderColor: "#E8E8E8",
-    justifyContent: "center",
-    backgroundColor: "#19297C",
-  },
-
-  cardText: {
-    textAlign: "center",
-    fontSize: 50,
-    backgroundColor: "transparent",
-    color: 'white'
   },
 });
