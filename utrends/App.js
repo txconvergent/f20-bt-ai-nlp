@@ -11,13 +11,17 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <>
+    <View style={styles.container}>
       <TopNavBar/>
       <BottomNavBar/>
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'stretch',
+  }
 });

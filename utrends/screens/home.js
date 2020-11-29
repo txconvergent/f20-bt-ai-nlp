@@ -47,7 +47,7 @@ export class HomeScreen extends React.Component {
             cardIndex={0}
             cardVerticalMargin={80}
             renderCard={this.renderCard}
-            
+
             infinite={true}
             backgroundColor={'white'}
             stackSize={2}
@@ -58,26 +58,29 @@ export class HomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: 'white',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
+  container: {
+    alignItems: 'stretch',
+    position: 'absolute',
+    top: "-10%",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'white',
+  },
   
-    card: {
-      flex: 1,
-      borderRadius: 15,
-      borderWidth: 2,
-      borderColor: "#E8E8E8",
-      justifyContent: "center",
-      backgroundColor: "#19297c"
-    },
-  
-    cardText: {
-      textAlign: "center",
-      fontSize: 50,
-      backgroundColor: "transparent",
-      color: 'white'
-    },
+  card: {
+    flex: 1,
+    borderRadius: 15,
+    borderWidth: 2,
+    borderColor: "#E8E8E8",
+    justifyContent: "center",
+    backgroundColor: "#19297C",
+  },
+
+  cardText: {
+    textAlign: "center",
+    fontSize: 50,
+    backgroundColor: "transparent",
+    color: 'white'
+  },
 });
