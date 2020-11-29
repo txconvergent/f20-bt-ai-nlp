@@ -15,7 +15,7 @@ export class HomeScreen extends React.Component {
   
     renderCard = (card) => {
       return (
-        <Card text={card} category={'None'}/>
+        <Card text={card} category={'General'}/>
       )
     }
   

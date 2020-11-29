@@ -20,11 +20,15 @@ export class Card extends React.Component {
                     <Text style={styles.sourceText}>@DailyTexan</Text>
                 </View>
 
+                <View style={styles.categoryContainer}>
+                    <Text style={styles.categoryText}>{this.state.category}</Text>
+                </View>
+
                 <View style={styles.bodyContainer}>
                     <Text style={styles.cardBodyText}>{this.state.text}</Text>
                 </View>
         
-                <TouchableOpacity style={styles.cardInfoButton}>
+                <TouchableOpacity style={styles.cardInfoButton} activeOpacity={0.6}>
                     <Text style={styles.cardInfoButtonText}>info and source</Text>
                 </TouchableOpacity>
             </View>
@@ -88,7 +92,26 @@ const styles = StyleSheet.create({
 
     sourceText: {
         fontSize: 20,
+        marginLeft: 10,
         color: 'white',
         fontFamily: 'AvenirNext-Bold',
+    },
+
+    categoryContainer: {
+        position: 'absolute',
+        top: '5%',
+        height: '8%',
+        right: -10,
+        width: '50%',
+        borderRadius: 10,
+        justifyContent: 'center',
+        backgroundColor: 'white',
+        paddingLeft: 15,
+    },
+
+    categoryText: {
+        fontSize: 15,
+        fontFamily: 'AvenirNext-Bold',
+        color: 'black',
     }
 });
