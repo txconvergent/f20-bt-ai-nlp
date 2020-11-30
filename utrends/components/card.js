@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
 
     cardBodyText: {
         textAlign: 'left',
-        fontSize: 30,
+        fontSize: 25,
         backgroundColor: "transparent",
         color: 'white',
         fontFamily: 'Avenir',

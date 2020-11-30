@@ -9,9 +9,18 @@ export class SwipeScreen extends React.Component {
       super(props);
       this.state = {
         category: 'General',
-        cards: ['This is a significant amount of text lol how much can we fit', '1', '2', '3', '4', '5', '6', '7', '8', ''],
+        cards: ['UT administration approves modified pass/fail expansion for fall 2020, spring 2021',
+                'Among Us Tournament\nTuesday, Dec 1 at 7pm',
+                'No. 13 Iowa State 23, No. 17 Texas 20: ‘Wish it didn’t have to go this way’',
+                '@UTAustin will increase rent for new residents at three University-owned apartment complexes by an average of 41%.',
+                '@AustinFC uniforms coming 12.18',
+                '5',
+                '6',
+                '7',
+                '8',
+                ''],
         sources: ['Twitter', 'HornsLink', 'News', 'News', 'Twitter', 'HornsLink', 'News', 'Twitter', 'HornsLink', 'Twitter'],
-        sourceText: ['@DailyTexan', 'HornsLink', 'Austin-American Statesman', 'Daily Texan', '@McconaugheyOfficial', 'HornsLink', 'KXAN', '@SamEhlinger', 'HornsLink', '@UTAustin'],
+        sourceText: ['@TheDailyTexan', 'HornsLink', 'Austin-American Statesman', 'The Daily Texan', '@McConaughey', 'HornsLink', 'KXAN', '@SamEhlinger', 'HornsLink', '@UTAustin'],
         cardIndex: 0,
       };
     }
