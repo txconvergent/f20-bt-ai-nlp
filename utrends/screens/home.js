@@ -7,8 +7,17 @@ export class SwipeScreen extends React.Component {
 
     constructor(props){
       super(props);
+
+      // Get the category from navigation, if provided
+      var cat = 'General'
+      try {
+        cat = props.route.params.category;
+      } catch (error) {
+        cat = 'General';
+      }
+
       this.state = {
-        category: 'General',
+        category: cat,
         cards: ['UT administration approves modified pass/fail expansion for fall 2020, spring 2021',
                 'Among Us Tournament\nTuesday, Dec 1 at 7pm',
                 'No. 13 Iowa State 23, No. 17 Texas 20: ‘Wish it didn’t have to go this way’',
