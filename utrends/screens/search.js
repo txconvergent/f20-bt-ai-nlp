@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
 
   scrollView: {
     backgroundColor: 'white',
-    marginTop: 30,
+    marginTop: 20,
   },
 
   cardRow: {
