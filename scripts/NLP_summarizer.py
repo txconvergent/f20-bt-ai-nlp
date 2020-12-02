@@ -60,7 +60,7 @@ def summarizeDailyTexan():
         print('----------finished--------')
 
 def main():
-    #summarizeDailyTexan()
+    summarizeDailyTexan()
     summarizeUTNews()
 
 if __name__ == "__main__":

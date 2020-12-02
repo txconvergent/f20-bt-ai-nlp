@@ -1,0 +1,12 @@
+fastapi
+firebase
+newspaper3k
+jsonlib
+bert-summarizer
+beautifulsoup4
+requests
+tweepy
+config
+selenium
+webdriver-manager
+uvicorn

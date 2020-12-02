@@ -20,10 +20,10 @@ app = FastApi()
 
 # NOTE: THIS FORMAT CAN TAKE ANY OTHER NEWS SITE IN THE FUTURE
 @app.get('/UTnews')
-def get_UT_news():
+async def get_UT_news():
     # run scripts to scrape daily texan and summarize article
-    UT_news_scraper.main()
-    NLP_summarizer.summarizeUTNews()
+    await UT_news_scraper.main()
+    await NLP_summarizer.summarizeUTNews()
 
     db_data = db.collection(u'UTNews').document(u'Documents').collection(u'Summarized').get()
     data = []
@@ -48,10 +48,10 @@ def get_UT_news():
     return UT_news_data
 
 @app.get('/DailyTexan')
-def get_UT_news():
+async def get_UT_news():
     # run scripts to scrape daily texan and summarize article
-    daily_texan_scraper.main()
-    NLP_summarizer.summarizeDailyTexan()
+    await daily_texan_scraper.main()
+    await NLP_summarizer.summarizeDailyTexan()
 
     db_data = db.collection(u'DailyTexan').document(u'Documents').collection(u'Summarized').get()
     data = []
@@ -77,9 +77,9 @@ def get_UT_news():
 
 
 @app.get('/Tweets/{user_name}')
-def get_user_tweets(user_name : str):
+async def get_user_tweets(user_name : str):
     # TODO: WE NEED TO TAKE DUPLICATE TWEETS INTO ACCOUNT
-    tweepy_script.main()
+    await tweepy_script.main()
     db_data = db.collection(u'Tweets').document(u'userTweets').collection(u'{}'.format(user_name)).get()
     data = []
 
@@ -104,8 +104,8 @@ def get_user_tweets(user_name : str):
     return twitter_data
 
 @app.get('/Tweets/TweetsOnCampus')
-def get_tweets_on_campus():
-    tweepy_script.main()
+async def get_tweets_on_campus():
+    await tweepy_script.main()
     db_data = db.collection(u'Tweets').document(u'TweetsOnCampus').get()
     data = []
 
@@ -131,8 +131,8 @@ def get_tweets_on_campus():
     return twitter_on_campus_tweets_data
 
 @app.get('/Hornslink')
-def get_hornslink():
-    hornslink_scrapper.main()
+async def get_hornslink():
+    await hornslink_scrapper.main()
     db_data = db.collection(u'Hornslink').get()
     data = []
 
