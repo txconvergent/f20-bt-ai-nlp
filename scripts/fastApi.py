@@ -20,10 +20,10 @@ app = FastApi()
 
 # NOTE: THIS FORMAT CAN TAKE ANY OTHER NEWS SITE IN THE FUTURE
 @app.get('/UTnews')
-async def get_UT_news():
+def get_UT_news():
     # run scripts to scrape daily texan and summarize article
-    await UT_news_scraper.main()
-    await NLP_summarizer.summarizeUTNews()
+    UT_news_scraper.main()
+    NLP_summarizer.summarizeUTNews()
 
     db_data = db.collection(u'UTNews').document(u'Documents').collection(u'Summarized').get()
     data = []
@@ -41,17 +41,17 @@ async def get_UT_news():
 
     # data is added to the json file, which is ultimately returned
     with open(r'data\UT_news_data.json', 'w', encoding='utf-8') as f:
+        # clears json and replaces with data list
         json.dump(data, f, indent = 6, ensure_ascii=False)
         UT_news_data = json.load(f)
-        # TODO: FIND A WAY TO CLEAR THE JSON FILE AFTER EVERY API CALL
 
     return UT_news_data
 
 @app.get('/DailyTexan')
-async def get_UT_news():
+def get_UT_news():
     # run scripts to scrape daily texan and summarize article
-    await daily_texan_scraper.main()
-    await NLP_summarizer.summarizeDailyTexan()
+    daily_texan_scraper.main()
+    NLP_summarizer.summarizeDailyTexan()
 
     db_data = db.collection(u'DailyTexan').document(u'Documents').collection(u'Summarized').get()
     data = []
@@ -69,17 +69,17 @@ async def get_UT_news():
 
     # data is added to the json file, which is ultimately returned
     with open(r'data\daily_texan_data.json', 'w', encoding='utf-8') as f:
+        # clears json and replaces with data list
         json.dump(data, f, indent = 6, ensure_ascii=False)
         UT_news_data = json.load(f)
-        # TODO: FIND A WAY TO CLEAR THE JSON FILE AFTER EVERY API CALL
 
     return UT_news_data
 
 
 @app.get('/Tweets/{user_name}')
-async def get_user_tweets(user_name : str):
+def get_user_tweets(user_name : str):
     # TODO: WE NEED TO TAKE DUPLICATE TWEETS INTO ACCOUNT
-    await tweepy_script.main()
+    tweepy_script.main()
     db_data = db.collection(u'Tweets').document(u'userTweets').collection(u'{}'.format(user_name)).get()
     data = []
 
@@ -96,16 +96,17 @@ async def get_user_tweets(user_name : str):
 
     # data is added to the json file, which is ultimately returned
     with open(r'data\twitter_data.json', 'w', encoding='utf-8') as f:
+        # clears json and replaces with data list
         json.dump(data, f, indent = 6, ensure_ascii=False)
         twitter_data = json.load(f)
-        # TODO: FIND A WAY TO CLEAR THE JSON FILE AFTER EVERY API CALL
+        
         
             
     return twitter_data
 
 @app.get('/Tweets/TweetsOnCampus')
-async def get_tweets_on_campus():
-    await tweepy_script.main()
+def get_tweets_on_campus():
+    tweepy_script.main()
     db_data = db.collection(u'Tweets').document(u'TweetsOnCampus').get()
     data = []
 
@@ -123,16 +124,16 @@ async def get_tweets_on_campus():
 
     # data is added to the json file, which is ultimately returned
     with open(r'data\twitter_on_campus_tweets_data.json', 'w', encoding='utf-8') as f:
+        # clears json and replaces with data list
         json.dump(data, f, indent = 6, ensure_ascii=False)
         twitter_on_campus_tweets_data = json.load(f)
-        # TODO: FIND A WAY TO CLEAR THE JSON FILE AFTER EVERY API CALL
         
             
     return twitter_on_campus_tweets_data
 
 @app.get('/Hornslink')
-async def get_hornslink():
-    await hornslink_scrapper.main()
+def get_hornslink():
+    hornslink_scrapper.main()
     db_data = db.collection(u'Hornslink').get()
     data = []
 
@@ -150,9 +151,8 @@ async def get_hornslink():
 
     # data is added to the json file, which is ultimately returned
     with open(r'data\hornslink_data.json', 'w', encoding='utf-8') as f:
+        # clears json and replaces with data list
         json.dump(data, f, indent = 6, ensure_ascii=False)
         hornslink_data = json.load(f)
-        # TODO: FIND A WAY TO CLEAR THE JSON FILE AFTER EVERY API CALL
-        
             
     return hornslink_data

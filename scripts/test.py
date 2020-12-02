@@ -21,8 +21,8 @@ for doc in db_data:
     }
 
     data.append(doc_data)
-
-with open(r'data\UT_news_data.json', 'w', encoding='utf-8') as f:
+    data = []
+with open(r'data\test_data.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, indent = 6, ensure_ascii=False)
 
 #     out_file = open(r'data\UT_news_data.json', 'w')
