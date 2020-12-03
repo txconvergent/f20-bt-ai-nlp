@@ -7,7 +7,8 @@ from firebase_admin import firestore
 
 #link to firebase
 cred = credentials.Certificate(r"C:\Users\akifa\OneDrive\Documents\GitHub\f20-bt-ai-nlp\scripts\forestoreKey.json")
-firebase_admin.initialize_app(cred)
+#firebase_admin.initialize_app(cred)
+firebase_admin.initialize_app(cred, name = 'UT_News_scraper')
 
 db = firestore.client()
 
@@ -101,6 +102,8 @@ def info():
 
 #putting each article into the database
 def main():
+    
+    print('STARTS UT NEWS SCRAPER')
     articles = info()
 
     for article in articles:
@@ -110,6 +113,7 @@ def main():
             u'url': article.URLS.url,
             u'category': article.URLS.category
         })
+    print('ENDS')
 
 
 if __name__ == "__main__":

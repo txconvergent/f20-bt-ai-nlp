@@ -9,7 +9,7 @@ import firebase_admin
 from firebase_admin import credentials
 
 cred = credentials.Certificate(r"C:\Users\akifa\OneDrive\Documents\GitHub\f20-bt-ai-nlp\scripts\forestoreKey.json")
-firebase_admin.initialize_app(cred)
+firebase_admin.initialize_app(cred, name = 'tweepy_script')
 db = firestore.client()
 
 auth = tweepy.OAuthHandler(config.consumer_key, config.consumer_secret)

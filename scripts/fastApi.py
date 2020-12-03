@@ -1,22 +1,25 @@
-from fastapi import FastApi
-import NLP_summarizer
-import UT_news_scraper
-import daily_texan_scraper
-import hornslink_scrapper
-import json
-import tweepy_script
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 import firebase_admin
 from firebase_admin import credentials
 
-
 cred = credentials.Certificate(r"C:\Users\akifa\OneDrive\Documents\GitHub\f20-bt-ai-nlp\scripts\forestoreKey.json")
+# is default firebase app as it is initialized first
 firebase_admin.initialize_app(cred)
+firebase_admin.initialize_app(cred, name = 'fastApi')
 db = firestore.client()
 
-app = FastApi()
+# Import local scripts AFTER intializing firebase app
+import NLP_summarizer
+import UT_news_scraper
+import daily_texan_scraper
+import hornslink_scrapper
+import tweepy_script
+import json
+
+from fastapi import FastAPI
+app = FastAPI()
 
 # NOTE: THIS FORMAT CAN TAKE ANY OTHER NEWS SITE IN THE FUTURE
 @app.get('/UTnews')
