@@ -2,6 +2,7 @@
 ## f20-bt-ai-nlp
 
 [Logo](https://drive.google.com/file/d/1XhUxQwym5rZwr8NbGql3SqGvKSVTTm9X/view?usp=sharing)
+
 [Presentation](https://docs.google.com/presentation/d/1GM5yk99FoLEdQrvWQrXttu1FRn96uA_L5eFhwBGK6lk/edit?usp=sharing)
 
 UTrends is a project for the Texas Convergent AI NLP build team for the Fall of 2020.
