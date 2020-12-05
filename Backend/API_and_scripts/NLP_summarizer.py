@@ -9,7 +9,6 @@ from newspaper import fulltext
 
 
 cred = credentials.Certificate(r"C:\Users\akifa\OneDrive\Documents\GitHub\f20-bt-ai-nlp\scripts\forestoreKey.json")
-# TODO: FIGURE OUT THE FIREBASE APP THING
 #firebase_admin.initialize_app(cred)
 firebase_admin.initialize_app(cred, name = 'Summarizer')
 db = firestore.client()
@@ -31,7 +30,6 @@ def summarizeUTNews():
         summary = "".join(result)
         summary = u'{}'.format(summary)
         new_data = {
-            # TODO: ONCE WORKING, DELETE ALL SUMMARIZED ARTICLES AND RESTART IT INCLUDING CATEGORY FIELD
             'category': doc.get('category'),
             'title': doc.get('title'),
             'text': summary,
@@ -43,7 +41,7 @@ def summarizeUTNews():
     print('END')
 
 # take text for each article, summarize it and add it to summarized collection
-# NOTE: given just the title and URL, we can summarize articles for any other publication in 
+# NOTE: Given just the title and URL, we can summarize articles for any other publication in 
 #       future
 def summarizeDailyTexan():
     all_data = db.collection(u'DailyTexan').document(u'Documents').collection(u'Unsummarized').get()
@@ -60,9 +58,9 @@ def summarizeDailyTexan():
         }
         db.collection(u'DailyTexan').document(u'Documents').collection(u'Summarized').add(new_data)
     
-
+# run for a demo run
 def main():
-    #summarizeDailyTexan()
+    summarizeDailyTexan()
     summarizeUTNews()
 
 if __name__ == "__main__":

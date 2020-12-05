@@ -1,3 +1,4 @@
+import json
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
@@ -16,7 +17,6 @@ import UT_news_scraper
 import daily_texan_scraper
 import hornslink_scrapper
 import tweepy_script
-import json
 
 from fastapi import FastAPI
 app = FastAPI()

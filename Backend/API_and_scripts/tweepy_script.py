@@ -19,16 +19,15 @@ api = tweepy.API(auth)
 query = "UT Austin"
 max_tweets = 3
 
-
+# given any geological locatoin, search_tweets() returns trending tweets near the area
 def search_tweets(query, max_tweets):
     search_results = api.search(q=query, count=max_tweets, languages=["en"], tweet_mode="extended")
 
     for tweet in search_results:
         # regex to remove links
         text = re.sub(r"http\S+", '', tweet._json['full_text'], flags=re.MULTILINE)
-        # only sends to db if the post has more than 3 likes, weeds out dumb tweets
+        # only sends to db if the post has more than 3 likes, weeds out "trending" tweets
         if tweet._json['favorite_count'] > 10 :
-
             if "], 'urls': [{'url'" in tweet._json:
                 # if tweet does contain a link
                 tweet_with_link(tweet, text, u'TweetsOnCampus')
@@ -39,6 +38,8 @@ def search_tweets(query, max_tweets):
         print("--------------------------------------------------------")
     print('###############################################################')
 
+
+# Given any Twitter username, get_user_tweets get the latest tweets of account
 def get_user_tweets(user, max_tweets):
     search_results = api.user_timeline(screen_name=user, count=max_tweets, languages=["en"], tweet_mode="extended")
     x = -1
@@ -63,9 +64,7 @@ def get_user_tweets(user, max_tweets):
     print('###############################################################')
 
 
-
-
-# adds tweet with a link to the db
+# adds tweet with a link attached to the db
 def tweet_with_link(tweet, text, document):
     print(tweet._json['user']['name'] + " (@" + tweet._json['user']['screen_name'] + 
                 "): " + text + tweet._json['entities']['urls'][0]['url'] + 'likes' + tweet._json['favorite_count']
@@ -83,7 +82,7 @@ def tweet_with_link(tweet, text, document):
     }
     db.collection(u'Tweets').document(document).collection(u'{}'.format(tweet._json['user']['screen_name'])).add(user_data)
 
-# adds tweet without a link to the db
+# adds tweets without a link to the db
 def tweet_without_link(tweet, text, document):
     print(tweet._json['user']['name'] + " (@" + tweet._json['user']['screen_name'] + 
         "): " + text + '   link of tweet: ' + 'https://twitter.com/{}/status/{}'.format(tweet._json['user']['screen_name'], tweet._json['id'])
@@ -98,7 +97,6 @@ def tweet_without_link(tweet, text, document):
     db.collection(u'Tweets').document(document).collection(u'{}'.format(tweet._json['user']['screen_name'])).add(user_data)
    
 
-
 def get_trends(lat=30.284477, lon=-97.736939):
     # get the trends location closest to the latitude, longitude coordinates
     closest_loc = api.trends_closest(lat, lon)
@@ -107,11 +105,11 @@ def get_trends(lat=30.284477, lon=-97.736939):
     for trend in trends[0]['trends']:
         print(trend['name'])
 
+# run script to get a demo
 if __name__ == '__main__':
     get_user_tweets("UTAustin", 4)
     get_user_tweets("thedailytexan", 4)
     get_user_tweets('Healthyhorns', 4)
     get_user_tweets('TexasLonghorns', 4)
-    search_tweets("UT Austin", 50)
+    search_tweets("UT Austin", 75)
     search_tweets("University of Texas at Austin", 50)
-    # get_trends()
